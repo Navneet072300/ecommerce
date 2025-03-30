@@ -3,8 +3,15 @@ import { IoBag } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import SearchBar from "./SearchBar";
+import CardDrawer from "../Layout/CardDrawer";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleCartDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
   return (
     <>
       <nav className="container mx-auto flex items-center justify-between py-4 px-6">
@@ -39,26 +46,30 @@ const NavBar = () => {
             Bottom Wear
           </Link>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 cursor-pointer">
           <Link to="/profile" className=" hover:text-black ">
             <FaUser className="h-6 w-6 text-gray-700" />
           </Link>
-          <button className="relative hover:text-black">
+          <button
+            onClick={toggleCartDrawer}
+            className="relative hover:text-black cursor-pointer"
+          >
             <IoBag className="h-6 w-6 text-gray-700" />
             <span className="absolute bg-rabbit-red text-white text-xs rounded-full px-2 py-0.5 -top-1.5">
               4
             </span>
           </button>
 
-          <div className="overflow-hidden">
+          <div className="overflow-hidden cursor-pointer">
             <SearchBar />
           </div>
 
-          <button className="md:hidden">
+          <button className="md:hidden cursor-pointer">
             <RxHamburgerMenu className="h-6 w-6 text-gray-700" />
           </button>
         </div>
       </nav>
+      <CardDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
     </>
   );
 };
