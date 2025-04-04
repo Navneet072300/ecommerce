@@ -7,7 +7,7 @@ const Hero = () => {
       <img
         src={heroImg}
         alt="Rabbit"
-        className="w-full  md:h-[600px] lg:h-[750px] object-cover"
+        className="w-full h-[400px] md:h-[600px] lg:h-[750px] object-cover"
       />
     </section>
   );
