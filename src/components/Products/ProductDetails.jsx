@@ -34,6 +34,16 @@ const ProductDetails = () => {
               />
             ))}
           </div>
+
+          <div className="md:w-1/2">
+            <div className="mb-4">
+              <img
+                src={selectedProduct.images[0]?.url}
+                alt="MainProduct"
+                className="w-full h-auto object-cover rounded-lg"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
