@@ -44,6 +44,17 @@ const ProductDetails = () => {
               />
             </div>
           </div>
+
+          <div className="md:hidden flex overscroll-x-scroll space-x-4 mb-4">
+            {selectedProduct.images.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={image.alt || `Thumbnail ${index}`}
+                className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
