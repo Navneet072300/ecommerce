@@ -1,7 +1,7 @@
 import NewArrivals from ".././components/Products/NewArrivals";
 import GenderCollectionSection from ".././components/Products/GenderCollectionSection";
 import Hero from "./../components/Layout/Hero";
-import ProductDetails from "@/components/Products/ProductDetails";
+import ProductDetails from "../components/Products/ProductDetails";
 
 const Home = () => {
   return (
