@@ -40,7 +40,10 @@ const ProductDetails = () => {
                 key={index}
                 src={image.url}
                 alt={image.alt || `Thumbnail ${index}`}
-                className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+                className={`w-20 h-20 object-cover rounded-lg cursor-pointer border
+                  ${
+                    mainImage === image.url ? "border-black" : "border-gray-300"
+                  }`}
                 onClick={() => setMainImage(image.url)}
               />
             ))}
@@ -49,7 +52,7 @@ const ProductDetails = () => {
           <div className="md:w-1/2">
             <div className="mb-4">
               <img
-                src={selectedProduct.images[0]?.url}
+                src={mainImage}
                 alt="MainProduct"
                 className="w-full h-auto object-cover rounded-lg"
               />
@@ -62,7 +65,11 @@ const ProductDetails = () => {
                 key={index}
                 src={image.url}
                 alt={image.alt || `Thumbnail ${index}`}
-                className="w-20 h-20 object-cover rounded-lg cursor-pointer border"
+                className={`w-20 h-20 object-cover rounded-lg cursor-pointer border
+                  ${
+                    mainImage === image.url ? "border-black" : "border-gray-300"
+                  }`}
+                onClick={() => setMainImage(image.url)}
               />
             ))}
           </div>
