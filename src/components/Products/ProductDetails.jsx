@@ -130,7 +130,7 @@ const ProductDetails = () => {
             </div>
 
             <button className="bg-black text-white py-2 px-6 rounded w-full mb-4">
-              ADD TO CART
+              ADD TO CART by you
             </button>
 
             <div className="mt-10 text-gray-700">
