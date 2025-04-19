@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const selectedProduct = {
   name: "Stylish Jacket",
@@ -37,6 +38,24 @@ const ProductDetails = () => {
   const handleQuantityChange = (action) => {
     if (action === "plus") setQuantity((prev) => prev + 1);
     if (action === "minus" && quantity > 1) setQuantity((prev) => prev - 1);
+  };
+
+  const handleAddtoCart = () => {
+    if (!selectedColor || !selectedSize) {
+      toast.error("Please select a color and size before adding to cart.", {
+        duration: 1000,
+      });
+      return;
+    }
+
+    setIsButtonDisabled(true);
+
+    setTimeout(() => {
+      toast.success("Product added to cart.", {
+        duration: 1000,
+      });
+      setIsButtonDisabled(false);
+    }, 500);
   };
 
   return (
@@ -124,9 +143,7 @@ const ProductDetails = () => {
                     key={size}
                     onClick={() => setSelectedSize(size)}
                     className={`px-4 py-4 rounded cursor-pointer border text-center ${
-                      selectedSize === size
-                        ? "bg-black text-white"
-                        : "bg-gray-300 text-gray-700"
+                      selectedSize === size ? "bg-black text-white" : ""
                     }`}
                   >
                     {size}
@@ -140,22 +157,31 @@ const ProductDetails = () => {
               <div className="flex items-center space-x-4 mt-2">
                 <button
                   onClick={() => handleQuantityChange("minus")}
-                  className="px-2 py-1 border-gray-200 rounded text-lg"
+                  className="px-2 py-1 border-gray-200 rounded text-lg cursor-pointer"
                 >
                   -
                 </button>
                 <span className="text-lg">{quantity}</span>
                 <button
                   onClick={() => handleQuantityChange("plus")}
-                  className="px-2 py-1 border-gray-200 rounded text-lg"
+                  className="px-2 py-1 border-gray-200 rounded text-lg cursor-pointer"
                 >
                   +
                 </button>
               </div>
             </div>
 
-            <button className="bg-black text-white py-2 px-6 rounded w-full mb-4">
-              ADD TO CART by you
+            <button
+              onClick={handleAddtoCart}
+              disabled={isButtonDisabled}
+              className={`bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer
+                ${
+                  isButtonDisabled
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-gray-900"
+                }`}
+            >
+              {isButtonDisabled ? "Adding.." : "ADD TO CART"}
             </button>
 
             <div className="mt-10 text-gray-700">
