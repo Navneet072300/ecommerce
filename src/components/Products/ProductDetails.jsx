@@ -23,6 +23,10 @@ const selectedProduct = {
 
 const ProductDetails = () => {
   const [mainImage, setMainImage] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
