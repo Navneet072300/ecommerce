@@ -34,6 +34,11 @@ const ProductDetails = () => {
     }
   }, [selectedProduct]);
 
+  const handleQuantityChange = (action) => {
+    if (action === "plus") setQuantity((prev) => prev + 1);
+    if (action === "minus" && quantity > 1) setQuantity((prev) => prev - 1);
+  };
+
   return (
     <div className="p-6">
       <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
@@ -96,7 +101,12 @@ const ProductDetails = () => {
                 {selectedProduct.colors.map((color) => (
                   <button
                     key={color}
-                    className="w-8 h-8 rounded-full cursor-pointer border"
+                    onClick={() => setSelectedColor(color)}
+                    className={`w-8 h-8 rounded-full cursor-pointer border ${
+                      selectedColor === color
+                        ? "bg-black border-2"
+                        : "bg-gray-300"
+                    }`}
                     style={{
                       backgroundColor: color.toLocaleLowerCase(),
                       filter: "brightness(0.5)",
@@ -112,7 +122,12 @@ const ProductDetails = () => {
                 {selectedProduct.sizes.map((size) => (
                   <button
                     key={size}
-                    className="px-4 py-4 rounded cursor-pointer border text-center"
+                    onClick={() => setSelectedSize(size)}
+                    className={`px-4 py-4 rounded cursor-pointer border text-center ${
+                      selectedSize === size
+                        ? "bg-black text-white"
+                        : "bg-gray-300 text-gray-700"
+                    }`}
                   >
                     {size}
                   </button>
@@ -123,11 +138,17 @@ const ProductDetails = () => {
             <div className="mb-6">
               <p className="text-gray-700">Quantity:</p>
               <div className="flex items-center space-x-4 mt-2">
-                <button className="px-2 py-1 border-gray-200 rounded text-lg">
+                <button
+                  onClick={() => handleQuantityChange("minus")}
+                  className="px-2 py-1 border-gray-200 rounded text-lg"
+                >
                   -
                 </button>
-                <span className="text-lg">1</span>
-                <button className="px-2 py-1 border-gray-200 rounded text-lg">
+                <span className="text-lg">{quantity}</span>
+                <button
+                  onClick={() => handleQuantityChange("plus")}
+                  className="px-2 py-1 border-gray-200 rounded text-lg"
+                >
                   +
                 </button>
               </div>
