@@ -114,7 +114,7 @@ const MyOrdersPage = () => {
                         order.isPaid
                           ? "bg-green-100 text-green-700"
                           : "bg-red-100 text-red-700"
-                      } px-2 py-1 rounded-full text-xs sm:text-sm`}
+                      } px-2 py-1 rounded-full text-xs sm:text-sm font-medium`}
                     >
                       {order.isPaid ? "Paid" : "Pending"}
                     </span>
