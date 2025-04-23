@@ -94,7 +94,7 @@ const NavBar = () => {
           <h2 className="text-xl font-semibold mb-4">Menu</h2>
           <nav className="flex flex-col space-y-4">
             <Link
-              to="#"
+              to="/collectio/all"
               onClick={toggleNavDrawer}
               className="block text-gray-600 hover:text-black"
             >
