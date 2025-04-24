@@ -27,7 +27,7 @@ const NavBar = () => {
         </div>
         <div className="hidden md:flex space-x-6">
           <Link
-            to="#"
+            to="/collections/all"
             className="text-grey-700 text-sm hover:text-black font-medium uppercase"
           >
             Men
