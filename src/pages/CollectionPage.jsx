@@ -1,8 +1,28 @@
-import React, { useEffect, useState } from "react";
+import SortOption from "../components/Products/SortOption";
+import FilterSidebar from "../components/Products/FilterSidebar";
+import React, { useEffect, useRef, useState } from "react";
 import { FaFilter } from "react-icons/fa6";
+import ProductGrid from "../components/Products/ProductGrid";
 
 const CollectionPage = () => {
   const [product, setProduct] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+
+  const togglesidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const hanldeClickOutside = (e) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", hanldeClickOutside);
+    document.removeEventListener("mousedown", hanldeClickOutside);
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -125,9 +145,30 @@ const CollectionPage = () => {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <button className="lg:hidden border p-2 flex justify-center items-center">
+      <button
+        onClick={togglesidebar}
+        className="lg:hidden border p-2 flex justify-center items-center"
+      >
         <FaFilter className="mr-2" />
+        <p className="">Filters</p>
       </button>
+
+      <div
+        ref={sidebarRef}
+        className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
+        fixed inset-y-0 z-50 left-0 w-64 bg-white overflow-y-auto transition-transform duration-300
+        lg:static lg:translate-x-0
+      }`}
+      >
+        <FilterSidebar />
+      </div>
+
+      <div className="p-4 grow">
+        <h2 className="text-2xl mb-4 uppercase">All Collections</h2>
+
+        <SortOption />
+        <ProductGrid products={product} />
+      </div>
     </div>
   );
 };
