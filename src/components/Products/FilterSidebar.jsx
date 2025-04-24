@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const FilterSidebar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     category: "",
     gender: "",
@@ -71,6 +72,23 @@ const FilterSidebar = () => {
     setPriceRange([0, params.maxPrice ? parseFloat(params.maxPrice) : 100]);
   }, [searchParams]);
 
+  const handleFilterChange = (e) => {
+    const { name, value, checked, type } = e.target;
+
+    let newFilters = { ...filters };
+
+    if (type === "checkbox") {
+      if (checked) {
+        newFilters[name] = [...(newFilters[name] || []), value];
+      } else {
+        newFilters[name] = newFilters[name].filter((item) => item !== value);
+      }
+    } else {
+      newFilters[name] = value;
+    }
+    setFilters(newFilters);
+  };
+
   return (
     <div className="p-4">
       <h3 className="text-xl font-medium text-gray-800 mb-4">Filter</h3>
@@ -82,6 +100,8 @@ const FilterSidebar = () => {
             <input
               type="radio"
               name="category"
+              value={category}
+              onChange={handleFilterChange}
               className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
             />
             <span className="text-gray-700">{category}</span>
@@ -96,6 +116,8 @@ const FilterSidebar = () => {
             <input
               type="radio"
               name="gender"
+              value={gender}
+              onChange={handleFilterChange}
               className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
             />
             <span className="text-gray-700">{gender}</span>
@@ -110,6 +132,8 @@ const FilterSidebar = () => {
             <button
               key={color}
               name="color"
+              value={color}
+              onClick={handleFilterChange}
               className="w-8 h-8 rounded-full border
            border-gray-300 cursor-pointer transition hover:scale-105"
               style={{ background: color.toLowerCase() }}
@@ -125,6 +149,8 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="material"
+              value={material}
+              onChange={handleFilterChange}
               className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
             />
             <span className="text-gray-700">{material}</span>
@@ -139,6 +165,8 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="size"
+              value={size}
+              onChange={handleFilterChange}
               className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
             />
             <span className="text-gray-700">{size}</span>
@@ -153,11 +181,31 @@ const FilterSidebar = () => {
             <input
               type="checkbox"
               name="brand"
+              value={brand}
+              onChange={handleFilterChange}
               className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300"
             />
             <span className="text-gray-700">{brand}</span>
           </div>
         ))}
+      </div>
+
+      <div className="mb-8">
+        <label className="block text-gray-600 font-medium mb-2">
+          Price Range
+        </label>
+
+        <input
+          type="range"
+          name="priceRange"
+          min={0}
+          max={100}
+          className=" h-2 w-full rounded-lg bg-gray-300 border-gray-300 appearance-none cursor-pointer"
+        />
+        <div className="flex justify-between text-gray-600 mt-2">
+          <span className="">$0</span>
+          <span className="">${priceRange[1]}</span>
+        </div>
       </div>
     </div>
   );
