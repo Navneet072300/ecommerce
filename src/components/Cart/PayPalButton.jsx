@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const PayPalButton = ({ amount, onSuccess, onError }) => {
@@ -5,7 +6,9 @@ const PayPalButton = ({ amount, onSuccess, onError }) => {
     <PayPalScriptProvider
       options={{
         clientId:
-          "EG5aXNxdlFPxWGz0G9VPOravpJotzJRne0tUX7-X1pxb4iXLmFiE58JJhcrCO_saQmGY2Ib_0ZXILZUY",
+          "ASjkZT5toV1qyvhxshAYL05xJXI8pePJCLh2kH8kl0rPQ9RggtQV0IMsbDEXwb0R13NW_Ug4vXTHwjFk",
+        currency: "USD",
+        components: "buttons",
       }}
     >
       <PayPalButtons
