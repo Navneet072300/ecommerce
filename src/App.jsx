@@ -9,6 +9,7 @@ import CollectionPage from "./pages/CollectionPage";
 import ProductDetails from "./components/Products/ProductDetails";
 import Checkout from "./components/Cart/Checkout";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import OrderDetailsPage from "./pages/OrderDetailsPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             path="order-confirmation"
             element={<OrderConfirmationPage />}
           />
+          <Route path="order/:id" element={<OrderDetailsPage />} />
         </Route>
         <Route></Route>
       </Routes>
