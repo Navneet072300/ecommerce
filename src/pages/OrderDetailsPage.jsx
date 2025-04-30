@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
@@ -98,6 +98,46 @@ const OrderDetailsPage = () => {
               </p>
             </div>
           </div>
+
+          <div className="overflow-x-auto">
+            <h4 className="text-lg font-semibold mb-4">Products</h4>
+            <table className="min-w-full mb-4 text-gray-600">
+              <thead className=" bg-gray-100">
+                <tr>
+                  <th className="py-2 px-4 sm:py-3">Name</th>
+                  <th className="py-2 px-4 sm:py-3">Unit Price</th>
+                  <th className="py-2 px-4 sm:py-3">Quantity</th>
+                  <th className="py-2 px-4 sm:py-3">Total</th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {orderDetails.orderItems.map((item) => (
+                  <tr key={item.productId} className="border-b cursor-pointer">
+                    <td className="py-2 px-4 flex items-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-12 h-12 object-cover rounded-lg mr-4"
+                      />
+                      <Link
+                        to={`/product/${item.productId}`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {item.name}
+                      </Link>
+                    </td>
+                    <td className="py-2 px-4">${item.price}</td>
+                    <td className="py-2 px-4">${item.quantity}</td>
+                    <td className="py-2 px-4">${item.price * item.quantity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <Link to="my-orders" className="text-blue-500 hover:underline">
+            Back to My Orders
+          </Link>
         </div>
       )}
     </div>
