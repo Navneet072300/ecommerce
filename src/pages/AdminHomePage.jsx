@@ -9,6 +9,30 @@ const orders = [
     totalPrice: 100,
     status: "pending",
   },
+  {
+    _id: 123,
+    user: {
+      name: "John Doe",
+    },
+    totalPrice: 100,
+    status: "pending",
+  },
+  {
+    _id: 123,
+    user: {
+      name: "John Doe",
+    },
+    totalPrice: 100,
+    status: "pending",
+  },
+  {
+    _id: 123,
+    user: {
+      name: "John Doe",
+    },
+    totalPrice: 100,
+    status: "pending",
+  },
 ];
 
 const AdminHomePage = () => {
@@ -55,6 +79,7 @@ const AdminHomePage = () => {
                     key={order._id}
                     className="border-b hover:bg-gray-50 cursor-pointer"
                   >
+                    <td className="p-4">{order._id}</td>
                     <td className="p-4">{order.user.name}</td>
                     <td className="p-4">{order.totalPrice}</td>
                     <td className="p-4">{order.status}</td>
