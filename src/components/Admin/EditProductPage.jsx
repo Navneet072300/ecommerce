@@ -33,11 +33,15 @@ const EditProductPage = () => {
     const file = e.target.files[0];
     console.log(file);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(productData);
+  };
 
   return (
     <div className="max-w-5xl mx-auto p-6 shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-6">Edit Product</h2>
-      <form className="">
+      <form className="" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label className="block font-semibold mb-2 text-gray-700">
             Product Name
@@ -140,7 +144,7 @@ const EditProductPage = () => {
             Upload Image
           </label>
           <input type="file" onChange={handleImageUpload} />
-          <div className="gap-4 flex mt-4">
+          <div className="flex gap-4 mt-4">
             {productData.images.map((image, index) => (
               <div className="" key={index}>
                 <img
@@ -154,7 +158,7 @@ const EditProductPage = () => {
         </div>
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 rounded-md cursor-pointer hover:bg-green-600 transition-colors"
+          className="w-full bg-green-500 text-white py-2 rounded-md cursor-pointer hover:bg-green-600 transition-colors"
         >
           Update Product
         </button>
